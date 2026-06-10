@@ -10,10 +10,10 @@
 Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu pour les **professionnels**, les **city-breakers** et les **jeunes actifs**.
 
 **Positionnement :**
-- 🏙️ Urbain
-- 💼 Business
-- ⚡ Moderne & fonctionnel
-- 💎 Premium accessible
+- Urbain
+- Business
+- Moderne & fonctionnel
+- Premium accessible
 
 **Inspirations :** CitizenM, Mama Shelter, OKKO Hotels, Pullman, Moxy
 
