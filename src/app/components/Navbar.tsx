@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Logo } from "./Logo";
 
 const links = [
   { label: "Accueil", href: "#accueil" },
@@ -31,20 +32,9 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => handleNav("#accueil")}
-          className="flex items-center gap-3 group"
-        >
-          <div className="w-8 h-8 border border-[#B8935A] flex items-center justify-center">
-            <span className="text-[#B8935A] text-xs tracking-widest font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>UH</span>
-          </div>
-          <span
-            className="text-white tracking-[0.25em] uppercase text-sm font-light"
-            style={{ fontFamily: "'Fraunces', serif", letterSpacing: "0.25em" }}
-          >
-            Urban House
-          </span>
+        {/* Logo avec adaptatif light/dark */}
+        <button onClick={() => handleNav("#accueil")} className="flex items-center">
+          <Logo variant={scrolled ? "dark" : "light"} size="sm" showText={true} />
         </button>
 
         {/* Desktop links */}

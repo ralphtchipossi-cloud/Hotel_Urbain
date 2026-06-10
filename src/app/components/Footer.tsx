@@ -68,8 +68,8 @@ export function Footer() {
             <a href="tel:+33320000000" className="text-[#B8935A] text-xs hover:underline block mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               +33 3 20 00 00 00
             </a>
-            <a href="mailto:contact@urbanhouse-roubaix.fr" className="text-[#B8935A] text-xs hover:underline" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              contact@urbanhouse-roubaix.fr
+            <a href="mailto:reception@hotel-rbx.fr" className="text-[#B8935A] text-xs hover:underline" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              reception@hotel-rbx.fr
             </a>
           </div>
         </div>

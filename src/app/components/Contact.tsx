@@ -42,7 +42,7 @@ export function Contact() {
               {
                 icon: Mail,
                 title: "E-mail",
-                lines: ["contact@urbanhouse-roubaix.fr", "reservation@urbanhouse-roubaix.fr"],
+                lines: ["reception@hotel_rbx.fr"],
               },
               {
                 icon: Clock,
