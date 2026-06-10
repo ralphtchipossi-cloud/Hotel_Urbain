@@ -1,3 +1,4 @@
+// src/app/components/Rooms.tsx
 import { useState } from "react";
 import { motion } from "motion/react";
 
@@ -81,7 +82,7 @@ export function Rooms() {
           >
             Conçues pour les professionnels et les voyageurs exigeants. Chaque chambre associe confort, connectivité et design urbain.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#E8E4DC]">

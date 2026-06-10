@@ -1,0 +1,14 @@
+/* À ajouter dans ton fichier globals.css */
+:root {
+  --urban-navy: #1E2A3E;
+  --urban-stone: #E8E4DC;
+  --urban-terracotta: #C67C4E;
+  --urban-dark: #0F1419;
+  --urban-gray: #5A626E;
+}
+
+.bg-urban-navy { background-color: #1E2A3E; }
+.bg-urban-stone { background-color: #E8E4DC; }
+.bg-urban-terracotta { background-color: #C67C4E; }
+.text-urban-navy { color: #1E2A3E; }
+.text-urban-stone { color: #E8E4DC; }
