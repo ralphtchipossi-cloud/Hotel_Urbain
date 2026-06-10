@@ -1,6 +1,5 @@
 // src/app/components/Hero.tsx
 import { motion } from "motion/react";
-import { Logo } from "./Logo";
 
 export function Hero() {
   const handleReserve = () => {
@@ -29,21 +28,11 @@ export function Hero() {
       
       {/* Contenu */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-        {/* Logo animé */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-6"
-        >
-          <Logo variant="light" size="lg" showText={false} />
-        </motion.div>
-
-        {/* Titre principal */}
+        {/* Titre principal uniquement - pas de logo */}
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-4"
           style={{ fontFamily: "'Fraunces', serif" }}
         >
@@ -53,7 +42,7 @@ export function Hero() {
         <motion.p 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl md:text-2xl text-white/80 mb-8 tracking-widest"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.15em" }}
         >
@@ -63,7 +52,7 @@ export function Hero() {
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="flex gap-4"
         >
           <button 
