@@ -1,11 +1,11 @@
-# 🏨 Urban House – Hôtel Business & Moderne
+# Urban House – Hôtel Business & Moderne
 
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.12-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
 
-## 📖 À propos
+## À propos
 
 Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu pour les **professionnels**, les **city-breakers** et les **jeunes actifs**.
 
@@ -19,7 +19,7 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 
 ---
 
-## 🚀 Technologies utilisées
+## Technologies utilisées
 
 | Technologie | Version | Utilisation |
 |-------------|---------|-------------|
@@ -33,7 +33,7 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prérequis
 
