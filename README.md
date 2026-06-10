@@ -5,21 +5,21 @@
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.12-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
 
-## À propos
+## 📖 À propos
 
 Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu pour les **professionnels**, les **city-breakers** et les **jeunes actifs**.
 
 **Positionnement :**
-- Urbain
-- Business
-- Moderne & fonctionnel
-- Premium accessible
+- 🏙️ Urbain
+- 💼 Business
+- ⚡ Moderne & fonctionnel
+- 💎 Premium accessible
 
 **Inspirations :** CitizenM, Mama Shelter, OKKO Hotels, Pullman, Moxy
 
 ---
 
-## Technologies utilisées
+## 🚀 Technologies utilisées
 
 | Technologie | Version | Utilisation |
 |-------------|---------|-------------|
@@ -33,7 +33,7 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 
 ---
 
-## Installation
+## 📦 Installation
 
 ### Prérequis
 
@@ -55,9 +55,14 @@ npm run dev
 
 
 Hotel_Urbain_Roubaix/
+├── public/
+│   └── images/
+│       └── hero-bg.jpg
 ├── src/
 │   ├── app/
 │   │   ├── components/
+│   │   │   ├── figma/              # Composants générés par l'IA Figma
+│   │   │   ├── ui/                 # Composants UI (shadcn)
 │   │   │   ├── Navbar.tsx
 │   │   │   ├── Hero.tsx
 │   │   │   ├── Rooms.tsx
@@ -69,14 +74,25 @@ Hotel_Urbain_Roubaix/
 │   │   │   ├── FAQ.tsx
 │   │   │   ├── Reservation.tsx
 │   │   │   ├── Contact.tsx
-│   │   │   └── Footer.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   └── Logo.tsx
 │   │   ├── styles/
+│   │   │   ├── fonts.css
 │   │   │   ├── globals.css
+│   │   │   ├── index.css
+│   │   │   ├── tailwind.css
 │   │   │   └── theme.css
 │   │   └── App.tsx
 │   └── main.tsx
 ├── index.html
 ├── package.json
 ├── vite.config.ts
-├── tailwind.config.js
+├── postcss.config.mjs
+├── default_shadcn_theme.css
+├── logo.png
+├── hero-bg.jpeg
+├── .gitattributes
+├── .gitignore
+├── ATTRIBUTIONS.md
+├── pnpm-workspace.yaml
 └── README.md
