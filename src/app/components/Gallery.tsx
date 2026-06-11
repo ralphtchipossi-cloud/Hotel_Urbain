@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Pause, Play } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const photos = [
@@ -50,8 +50,37 @@ const categories = ["Tous", ...Array.from(new Set(photos.map((p) => p.category))
 export function Gallery() {
   const [filter, setFilter] = useState("Tous");
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [autoplayIndex, setAutoplayIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const filtered = filter === "Tous" ? photos : photos.filter((p) => p.category === filter);
+  
+  const currentAutoplayImage = filtered[autoplayIndex];
+
+  // Auto-slide toutes les 2 secondes
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      setAutoplayIndex((prev) => (prev + 1) % filtered.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [isPlaying, filtered.length]);
+
+  // Reset autoplay index quand on change de filtre
+  useEffect(() => {
+    setAutoplayIndex(0);
+    setIsPlaying(true);
+  }, [filter]);
+
+  const prevImage = () => {
+    setIsPlaying(false);
+    setAutoplayIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
+  };
+
+  const nextImage = () => {
+    setIsPlaying(false);
+    setAutoplayIndex((prev) => (prev + 1) % filtered.length);
+  };
 
   const prev = useCallback(() => {
     if (lightbox === null) return;
@@ -119,44 +148,87 @@ export function Gallery() {
           </div>
         </div>
 
-        {/* Masonry-style grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#E8E4DC]">
-          {filtered.map((photo, i) => (
+        {/* Carrousel automatique */}
+        <div className="relative overflow-hidden bg-[#E8E4DC] rounded-none aspect-[16/9]">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={photo.url}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className={`relative overflow-hidden cursor-pointer group bg-[#E8E4DC] ${
-                i === 0 || i === 5 ? "md:col-span-2 md:row-span-2" : ""
-              }`}
-              style={{ aspectRatio: i === 0 || i === 5 ? "16/10" : "4/3" }}
-              onClick={() => setLightbox(i)}
+              key={`${filter}-${autoplayIndex}`}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 cursor-pointer"
+              onClick={() => setLightbox(autoplayIndex)}
             >
               <img
-                src={photo.url}
-                alt={photo.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                src={currentAutoplayImage?.url}
+                alt={currentAutoplayImage?.label}
+                className="w-full h-full object-cover"
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-[#131210]/0 group-hover:bg-[#131210]/50 transition-all duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <ZoomIn className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  <span className="text-white text-xs tracking-widest uppercase" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {photo.label}
-                  </span>
-                </div>
-              </div>
-              {/* Category tag */}
-              <div className="absolute top-3 left-3 bg-[#131210]/70 backdrop-blur-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-white/60 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {photo.category}
-                </span>
+              {/* Overlay avec label */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <p className="text-white text-sm md:text-base font-['Plus Jakarta Sans'] tracking-wider">
+                  {currentAutoplayImage?.label}
+                </p>
+                <p className="text-white/50 text-xs mt-1">
+                  {currentAutoplayImage?.category}
+                </p>
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Contrôles du carrousel */}
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex gap-2">
+            {/* Bouton Play/Pause */}
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="w-10 h-10 border border-[#E8E4DC] flex items-center justify-center text-[#7A7568] hover:border-[#B8935A] hover:text-[#B8935A] transition-colors"
+            >
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            </button>
+
+            {/* Indicateurs de slide */}
+            <div className="flex gap-2 ml-4 items-center">
+              {filtered.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setIsPlaying(false);
+                    setAutoplayIndex(i);
+                  }}
+                  className={`transition-all duration-300 ${
+                    i === autoplayIndex
+                      ? "w-8 h-1.5 bg-[#B8935A]"
+                      : "w-1.5 h-1.5 bg-[#C8C3B8] hover:bg-[#B8935A]"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              onClick={prevImage}
+              className="w-10 h-10 border border-[#E8E4DC] flex items-center justify-center text-[#7A7568] hover:border-[#131210] hover:text-[#131210] transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <button
+              onClick={nextImage}
+              className="w-10 h-10 border border-[#E8E4DC] flex items-center justify-center text-[#7A7568] hover:border-[#131210] hover:text-[#131210] transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+          </div>
+        </div>
+
+        {/* Compteur */}
+        <div className="text-center mt-4">
+          <span className="text-[#7A7568] text-xs">
+            {autoplayIndex + 1} / {filtered.length}
+          </span>
         </div>
       </div>
 
