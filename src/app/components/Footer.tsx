@@ -1,6 +1,11 @@
 export function Footer() {
   const year = new Date().getFullYear();
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Merci ! Vous recevrez nos offres exclusives.");
+  };
+
   return (
     <footer className="bg-[#0C0B09] py-16 px-6 lg:px-16">
       <div className="max-w-7xl mx-auto">
@@ -29,6 +34,26 @@ export function Footer() {
                   <span className="text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{s}</span>
                 </div>
               ))}
+            </div>
+
+            {/* NEWSLETTER - AJOUTÉE */}
+            <div className="mt-6 pt-4 border-t border-white/10">
+              <p className="text-white/20 text-xs mb-2">✨ Offre exclusive en avant-première ?</p>
+              <form onSubmit={handleSubmit} className="flex gap-2">
+                <input 
+                  type="email" 
+                  placeholder="Votre email" 
+                  required
+                  className="bg-white/5 border border-white/10 p-2 text-xs flex-1 text-white placeholder:text-white/20 focus:outline-none focus:border-[#B8935A]"
+                />
+                <button 
+                  type="submit"
+                  className="bg-[#B8935A] px-3 py-2 text-xs text-white hover:bg-[#A0803F] transition-colors whitespace-nowrap"
+                >
+                  Je m'inscris
+                </button>
+              </form>
+              <p className="text-white/20 text-[9px] mt-2">Sans spam. Désinscription 1 clic.</p>
             </div>
           </div>
 

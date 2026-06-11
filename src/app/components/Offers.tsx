@@ -13,6 +13,7 @@ const offers = [
     cta: "Réserver ce pack",
     color: "#B8935A",
     featured: true,
+    urgentMessage: "✅ 43 entreprises ont réservé ce mois-ci",
   },
   {
     icon: Moon,
@@ -25,6 +26,7 @@ const offers = [
     cta: "Profiter de l'offre",
     color: "#131210",
     featured: false,
+    urgentMessage: null,
   },
   {
     icon: Zap,
@@ -37,6 +39,7 @@ const offers = [
     cta: "Saisir l'offre",
     color: "#131210",
     featured: false,
+    urgentMessage: "⏰ Plus que 2 chambres à ce prix",
   },
   {
     icon: Tag,
@@ -49,6 +52,7 @@ const offers = [
     cta: "Rejoindre Urban Club",
     color: "#131210",
     featured: false,
+    urgentMessage: null,
   },
 ];
 
@@ -136,11 +140,18 @@ export function Offers() {
                     {offer.priceNote}
                   </span>
                 </div>
-                <div className="mb-6">
+                <div className="mb-2">
                   <span className="bg-[#B8935A]/15 text-[#B8935A] text-xs px-2 py-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.05em" }}>
                     Économie : {offer.saving}
                   </span>
                 </div>
+
+                {/* Message d'urgence */}
+                {offer.urgentMessage && (
+                  <div className={`mb-4 text-xs font-bold ${offer.urgentMessage.includes("⏰") ? "text-red-500" : "text-green-600"}`} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {offer.urgentMessage}
+                  </div>
+                )}
 
                 <button
                   onClick={handleReserve}

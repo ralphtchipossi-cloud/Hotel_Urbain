@@ -5,8 +5,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const reviews = [
   {
     name: "Sophie M.",
-    role: "Directrice commerciale",
-    company: "Lyon",
+    role: "Consultante",
+    location: "3 voyages/mois",
+    company: "Deloitte",
     rating: 5,
     text: "Un hôtel qui a tout compris pour les voyages business. Le coworking est impeccable, la connexion irréprochable, et le staff toujours disponible. Je reviens chaque mois à Roubaix et je ne logerai nulle part ailleurs.",
     stay: "Urban Confort — 3 nuits",
@@ -15,7 +16,8 @@ const reviews = [
   {
     name: "Thomas R.",
     role: "Consultant freelance",
-    company: "Paris",
+    location: "Paris",
+    company: "",
     rating: 5,
     text: "L'espace coworking est une vraie pépite. Des bureaux ergonomiques, la lumière parfaite, et le café offert. J'ai réussi à finir un gros projet en deux jours dans les meilleures conditions. L'hôtel a un vrai design sans être prétentieux.",
     stay: "Urban Standard — 2 nuits",
@@ -24,7 +26,8 @@ const reviews = [
   {
     name: "Aurélie & Marc",
     role: "City-break week-end",
-    company: "Bruxelles",
+    location: "Bruxelles",
+    company: "",
     rating: 5,
     text: "On cherchait un hôtel moderne et abordable pour explorer Roubaix et Lille. Urban House était parfait : chambre confortable, petit-déjeuner excellent, et personnel aux petits soins. Le rapport qualité-prix est imbattable.",
     stay: "Urban Suite — 2 nuits",
@@ -33,7 +36,8 @@ const reviews = [
   {
     name: "Kevin L.",
     role: "Chef de projet IT",
-    company: "Nantes",
+    location: "Nantes",
+    company: "",
     rating: 5,
     text: "Chambre moderne, propre, bien insonorisée. Le bar est sympa pour décompresser en soirée. Le parking sécurisé avec borne électrique est un vrai plus. Je recommande sans hésiter à tous mes collègues de passage dans le Nord.",
     stay: "Urban Standard — 1 nuit",
@@ -42,7 +46,8 @@ const reviews = [
   {
     name: "Isabelle P.",
     role: "DRH",
-    company: "Lille",
+    location: "Lille",
+    company: "",
     rating: 5,
     text: "Nous avons organisé un séminaire de 12 personnes dans les salles de réunion. Tout était parfait : équipements modernes, pause-café soignée, et coordination hôtelière sans faille. Nous reviendrons pour le prochain séminaire.",
     stay: "Séminaire — salle premium",
@@ -158,8 +163,16 @@ export function Testimonials() {
                       {review.name}
                     </p>
                     <p className="text-[#7A7568] text-xs mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      {review.role} — {review.company}
+                      {review.role}
                     </p>
+                    <p className="text-[#B8935A] text-[10px] mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      📍 {review.location}
+                    </p>
+                    {review.company && (
+                      <p className="text-[#B8935A] text-[10px] mt-0.5 font-medium">
+                        🏢 {review.company}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
@@ -199,6 +212,20 @@ export function Testimonials() {
                 <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Section "Ils nous font confiance" - NOUVEAU */}
+        <div className="mt-16 pt-8 border-t border-[#E8E4DC] text-center">
+          <p className="text-[#7A7568] text-xs tracking-widest uppercase mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Ils nous font confiance
+          </p>
+          <div className="flex flex-wrap justify-center gap-8 opacity-60">
+            {["Décathlon", "Bonduelle", "La Redoute", "Kiabi", "OVHcloud"].map((logo) => (
+              <span key={logo} className="text-[#131210] text-sm tracking-wider font-light" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                {logo}
+              </span>
+            ))}
           </div>
         </div>
 

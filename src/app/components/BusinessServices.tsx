@@ -2,14 +2,14 @@ import { Wifi, Car, Coffee, UtensilsCrossed, BriefcaseBusiness, Clock, ShieldChe
 import { motion } from "motion/react";
 
 const services = [
-  { icon: Wifi, title: "Wi-Fi Fibre 1 Gbps", desc: "Connexion dédiée dans toutes les zones de l'hôtel, y compris les espaces extérieurs." },
-  { icon: Car, title: "Parking sécurisé", desc: "Parking couvert avec bornes de recharge électrique. Réservation à l'avance conseillée." },
-  { icon: Coffee, title: "Petit-déjeuner business", desc: "Buffet continental servi dès 6h30. Café, viennoiseries, œufs, charcuteries de qualité." },
-  { icon: UtensilsCrossed, title: "Restaurant & bar", desc: "Cuisine moderne et locale. Bar ouvert jusqu'à minuit avec cocktails et carte snacking." },
-  { icon: BriefcaseBusiness, title: "Conciergerie pro", desc: "Réservation de taxis, navettes aéroport, coursiers, traductions et assistances diverses." },
-  { icon: Clock, title: "Check-in/out flexible", desc: "Early check-in dès 8h et late check-out jusqu'à 16h selon disponibilité, sans surcoût." },
-  { icon: ShieldCheck, title: "Sécurité 24h/24", desc: "Équipe de sécurité présente en permanence. Accès par badge magnétique sécurisé." },
-  { icon: Dumbbell, title: "Fitness & bien-être", desc: "Salle de sport équipée ouverte 24h/24. Espace détente avec sauna sur réservation." },
+  { icon: Wifi, title: "Wi-Fi Fibre 1 Gbps", desc: "Tes visios sans freeze. Jamais.", benefit: "Conférence sans interruption" },
+  { icon: Car, title: "Parking sécurisé", desc: "Ta voiture dort mieux que toi.", benefit: "Bornes électriques incluses" },
+  { icon: Coffee, title: "Petit-déjeuner business", desc: "Avant ta première réunion, on t'a préparé ça.", benefit: "Dès 6h30" },
+  { icon: UtensilsCrossed, title: "Restaurant & bar", desc: "Cuisine locale. Bar jusqu'à minuit.", benefit: "Room service dispo" },
+  { icon: BriefcaseBusiness, title: "Conciergerie pro", desc: "On s'occupe du reste. Toi, bosse.", benefit: "Taxis, navettes, coursiers" },
+  { icon: Clock, title: "Check-in/out flexible", desc: "Arrive tôt, repars tard. Sans stress.", benefit: "Sans surcoût" },
+  { icon: ShieldCheck, title: "Sécurité 24h/24", desc: "Badge et équipe. Toujours.", benefit: "Accès sécurisé" },
+  { icon: Dumbbell, title: "Fitness & bien-être", desc: "Décompresse avant ta journée.", benefit: "Sauna sur réservation" },
 ];
 
 export function BusinessServices() {
@@ -75,6 +75,13 @@ export function BusinessServices() {
                   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.78rem", lineHeight: 1.75 }}
                 >
                   {s.desc}
+                </p>
+                {/* Bénéfice */}
+                <p
+                  className="text-[#B8935A] text-[0.7rem] mt-1"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                  ✨ {s.benefit}
                 </p>
               </motion.div>
             );

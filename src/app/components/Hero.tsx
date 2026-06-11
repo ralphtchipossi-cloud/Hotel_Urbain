@@ -46,7 +46,7 @@ export function Hero() {
           className="text-xl md:text-2xl text-white/80 mb-8 tracking-widest"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.15em" }}
         >
-          HÔTEL BUSINESS & MODERNE — ROUBAIX
+          Là où Roubaix travaille et se repose.
         </motion.p>
         
         <motion.div 
