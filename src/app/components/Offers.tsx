@@ -13,7 +13,6 @@ const offers = [
     cta: "Réserver ce pack",
     color: "#B8935A",
     featured: true,
-    urgentMessage: "✅ 43 entreprises ont réservé ce mois-ci",
   },
   {
     icon: Moon,
@@ -39,7 +38,6 @@ const offers = [
     cta: "Saisir l'offre",
     color: "#131210",
     featured: false,
-    urgentMessage: "⏰ Plus que 2 chambres à ce prix",
   },
   {
     icon: Tag,
