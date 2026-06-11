@@ -9,7 +9,8 @@ const rooms = [
     tagline: "Le bureau où tu dors",
     price: "89",
     size: "18 m²",
-    img: "https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=800&h=600&fit=crop&auto=format",
+    // Image SUITE (la plus premium) → pour Standard (corrigé)
+    img: "https://images.unsplash.com/photo-1549638441-b787d2e11f14?w=800&h=600&fit=crop&auto=format",
     features: ["Lit double 160×200", "Bureau ergonomique", "Wi-Fi fibre 1 Gbps", "TV 4K 43\"", "Climatisation", "Coffre-fort"],
     benefit: "Pour les pros pressés mais exigeants",
     highlight: false,
@@ -20,6 +21,7 @@ const rooms = [
     tagline: "Ta bulle dans la ville",
     price: "129",
     size: "26 m²",
+    // Image CONFORT (inchangée)
     img: "https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?w=800&h=600&fit=crop&auto=format",
     features: ["Lit king size 180×200", "Coin salon", "Bureau premium", "Wi-Fi fibre 1 Gbps", "Mini-bar", "Vue ville"],
     benefit: "Calme, espace, lumière",
@@ -31,7 +33,8 @@ const rooms = [
     tagline: "Le penthouse du business travel",
     price: "189",
     size: "42 m²",
-    img: "https://images.unsplash.com/photo-1549638441-b787d2e11f14?w=800&h=600&fit=crop&auto=format",
+    // Image STANDARD (la plus simple) → pour Suite (corrigé)
+    img: "https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=800&h=600&fit=crop&auto=format",
     features: ["Chambre séparée", "Salon de travail", "Baignoire balnéo", "Accueil VIP", "Petit-déjeuner inclus", "Late check-out"],
     benefit: "Impressionner ou se faire plaisir",
     highlight: false,
