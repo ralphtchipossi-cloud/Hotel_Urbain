@@ -1,6 +1,7 @@
 // src/app/components/Rooms.tsx
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useNavigate } from 'react-router-dom';
 
 const rooms = [
   {
@@ -9,7 +10,6 @@ const rooms = [
     tagline: "Le bureau où tu dors",
     price: "89",
     size: "18 m²",
-    // Image SUITE (la plus premium) → pour Standard (corrigé)
     img: "https://images.unsplash.com/photo-1549638441-b787d2e11f14?w=800&h=600&fit=crop&auto=format",
     features: ["Lit double 160×200", "Bureau ergonomique", "Wi-Fi fibre 1 Gbps", "TV 4K 43\"", "Climatisation", "Coffre-fort"],
     benefit: "Pour les pros pressés mais exigeants",
@@ -21,7 +21,6 @@ const rooms = [
     tagline: "Ta bulle dans la ville",
     price: "129",
     size: "26 m²",
-    // Image CONFORT (inchangée)
     img: "https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?w=800&h=600&fit=crop&auto=format",
     features: ["Lit king size 180×200", "Coin salon", "Bureau premium", "Wi-Fi fibre 1 Gbps", "Mini-bar", "Vue ville"],
     benefit: "Calme, espace, lumière",
@@ -33,7 +32,6 @@ const rooms = [
     tagline: "Le penthouse du business travel",
     price: "189",
     size: "42 m²",
-    // Image STANDARD (la plus simple) → pour Suite (corrigé)
     img: "https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=800&h=600&fit=crop&auto=format",
     features: ["Chambre séparée", "Salon de travail", "Baignoire balnéo", "Accueil VIP", "Petit-déjeuner inclus", "Late check-out"],
     benefit: "Impressionner ou se faire plaisir",
@@ -43,9 +41,10 @@ const rooms = [
 
 export function Rooms() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const handleReserve = () => {
-    document.querySelector("#reservation")?.scrollIntoView({ behavior: "smooth" });
+  const handleReserve = (roomName: string, price: string) => {
+    navigate(`/checkout?room=${encodeURIComponent(roomName)}&price=${price}`);
   };
 
   return (
@@ -168,7 +167,6 @@ export function Rooms() {
                     >
                       / nuit
                     </p>
-                    {/* Bénéfice émotionnel */}
                     <p
                       className="text-[#B8935A] text-[10px] mt-1 italic"
                       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
@@ -193,7 +191,7 @@ export function Rooms() {
                 </ul>
 
                 <button
-                  onClick={handleReserve}
+                  onClick={() => handleReserve(room.name, room.price)}
                   className="mt-6 w-full py-3 border border-[#131210] text-[#131210] hover:bg-[#131210] hover:text-white transition-all duration-300 text-sm tracking-widest uppercase"
                   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.15em" }}
                 >

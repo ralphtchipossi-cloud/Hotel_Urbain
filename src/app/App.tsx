@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Rooms } from "./components/Rooms";
@@ -13,6 +14,8 @@ import { FAQ } from "./components/FAQ";
 import { Reservation } from "./components/Reservation";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { Checkout } from "./pages/Checkout";
+import { Confirmation } from "./pages/Confirmation";
 
 function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -40,10 +43,10 @@ function ScrollToTop() {
   );
 }
 
-export default function App() {
+// Page d'accueil avec toutes les sections
+function HomePage() {
   return (
-    <div className="w-full min-h-screen">
-      <Navbar />
+    <>
       <Hero />
 
       {/* About strip */}
@@ -89,6 +92,19 @@ export default function App() {
       <FAQ />
       <Reservation />
       <Contact />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="w-full min-h-screen">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+      </Routes>
       <Footer />
       <ScrollToTop />
     </div>
