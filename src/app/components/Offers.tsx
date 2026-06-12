@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Tag, Briefcase, Moon, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const offers = [
   {
@@ -13,6 +14,7 @@ const offers = [
     cta: "Réserver ce pack",
     color: "#B8935A",
     featured: true,
+    link: "/checkout?room=Pack%20S%C3%A9jour%20Pro&price=149",
   },
   {
     icon: Moon,
@@ -25,7 +27,7 @@ const offers = [
     cta: "Profiter de l'offre",
     color: "#131210",
     featured: false,
-    urgentMessage: null,
+    link: "/checkout?room=Escapade%20City-Break&price=199",
   },
   {
     icon: Zap,
@@ -38,6 +40,7 @@ const offers = [
     cta: "Saisir l'offre",
     color: "#131210",
     featured: false,
+    link: "/checkout?room=Tonight%20Deal&price=69",
   },
   {
     icon: Tag,
@@ -50,13 +53,15 @@ const offers = [
     cta: "Rejoindre Urban Club",
     color: "#131210",
     featured: false,
-    urgentMessage: null,
+    link: "/urban-club",
   },
 ];
 
 export function Offers() {
-  const handleReserve = () => {
-    document.querySelector("#reservation")?.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+
+  const handleReserve = (link: string) => {
+    navigate(link);
   };
 
   return (
@@ -144,15 +149,8 @@ export function Offers() {
                   </span>
                 </div>
 
-                {/* Message d'urgence */}
-                {offer.urgentMessage && (
-                  <div className={`mb-4 text-xs font-bold ${offer.urgentMessage.includes("⏰") ? "text-red-500" : "text-green-600"}`} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {offer.urgentMessage}
-                  </div>
-                )}
-
                 <button
-                  onClick={handleReserve}
+                  onClick={() => handleReserve(offer.link)}
                   className={`w-full py-3 text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
                     offer.featured
                       ? "bg-[#B8935A] text-white hover:bg-[#A0803F]"

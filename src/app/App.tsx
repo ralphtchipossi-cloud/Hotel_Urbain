@@ -16,6 +16,9 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Checkout } from "./pages/Checkout";
 import { Confirmation } from "./pages/Confirmation";
+import { CoworkingBooking } from "./pages/CoworkingBooking";
+import { CoworkingConfirmation } from "./pages/CoworkingConfirmation"; // AJOUTÉ
+import { UrbanClub } from "./pages/UrbanClub";
 
 function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -104,6 +107,9 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/coworking-booking" element={<CoworkingBooking />} />
+        <Route path="/coworking-confirmation" element={<CoworkingConfirmation />} /> {/* AJOUTÉ */}
+        <Route path="/urban-club" element={<UrbanClub />} />
       </Routes>
       <Footer />
       <ScrollToTop />

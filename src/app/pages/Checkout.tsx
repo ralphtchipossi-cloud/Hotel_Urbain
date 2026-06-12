@@ -16,6 +16,7 @@ export function Checkout() {
     checkout: '',
     adults: 1,
     children: 0,
+    specialRequests: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -28,7 +29,7 @@ export function Checkout() {
     }
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     localStorage.setItem('bookingData', JSON.stringify({ ...formData, [e.target.name]: e.target.value }));
   };
@@ -38,23 +39,46 @@ export function Checkout() {
     setLoading(true);
     setError('');
 
-    // Simulation de paiement (en attendant Stripe)
-    setTimeout(() => {
-      // Sauvegarder la réservation en local
-      const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
-      reservations.push({
-        id: Date.now(),
-        ...formData,
-        room,
-        price,
-        status: 'confirmé',
-        date: new Date().toISOString(),
+    try {
+      const response = await fetch('http://localhost:5000/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          room: room,
+          checkin: formData.checkin,
+          checkout: formData.checkout,
+          adults: formData.adults,
+          children: formData.children,
+          specialRequests: formData.specialRequests,
+          totalAmount: parseInt(price),
+          paymentIntentId: 'payment_at_hotel',
+        }),
       });
-      localStorage.setItem('reservations', JSON.stringify(reservations));
-      
-      // Rediriger vers confirmation
-      navigate('/confirmation', { state: { room, price, dates: { checkin: formData.checkin, checkout: formData.checkout } } });
-    }, 1500);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de la réservation');
+      }
+
+      localStorage.removeItem('bookingData');
+      navigate('/confirmation', {
+        state: {
+          room,
+          price,
+          dates: { checkin: formData.checkin, checkout: formData.checkout },
+          name: formData.name,
+          email: formData.email,
+        },
+      });
+    } catch (err) {
+      console.error('Erreur:', err);
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,25 +88,83 @@ export function Checkout() {
         <div className="bg-white p-8">
           <h2 className="text-2xl font-light mb-6">Vos informations</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input type="text" name="name" placeholder="Nom complet *" required value={formData.name} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]" />
-            <input type="email" name="email" placeholder="Email *" required value={formData.email} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]" />
-            <input type="tel" name="phone" placeholder="Téléphone *" required value={formData.phone} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Nom complet *"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email *"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Téléphone *"
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]"
+            />
             <div className="grid grid-cols-2 gap-4">
-              <input type="date" name="checkin" placeholder="Arrivée" required value={formData.checkin} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]" />
-              <input type="date" name="checkout" placeholder="Départ" required value={formData.checkout} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]" />
+              <input
+                type="date"
+                name="checkin"
+                required
+                value={formData.checkin}
+                onChange={handleChange}
+                className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]"
+              />
+              <input
+                type="date"
+                name="checkout"
+                required
+                value={formData.checkout}
+                onChange={handleChange}
+                className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]"
+              />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <select name="adults" value={formData.adults} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]">
-                {[1,2,3,4].map(n => <option key={n} value={n}>{n} adulte{n>1?'s':''}</option>)}
+                {[1, 2, 3, 4].map(n => <option key={n} value={n}>{n} adulte{n > 1 ? 's' : ''}</option>)}
               </select>
               <select name="children" value={formData.children} onChange={handleChange} className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A]">
                 <option value="0">0 enfant</option>
-                {[1,2,3].map(n => <option key={n} value={n}>{n} enfant{n>1?'s':''}</option>)}
+                {[1, 2, 3].map(n => <option key={n} value={n}>{n} enfant{n > 1 ? 's' : ''}</option>)}
               </select>
             </div>
+            <textarea
+              name="specialRequests"
+              placeholder="Demandes particulières (arrivée tardive, bébé, etc.)"
+              value={formData.specialRequests}
+              onChange={handleChange}
+              rows={3}
+              className="w-full p-3 border border-[#E8E4DC] focus:outline-none focus:border-[#B8935A] resize-none"
+            />
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <button type="submit" disabled={loading} className="w-full bg-[#B8935A] text-white py-3 hover:bg-[#A0803F] transition">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#B8935A] text-white py-3 hover:bg-[#A0803F] transition"
+            >
               {loading ? 'Traitement en cours...' : `Confirmer la réservation - ${price}€`}
+            </button>
+            {/* Bouton Annuler */}
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="w-full border border-[#131210] text-[#131210] py-3 hover:bg-[#131210] hover:text-white transition mt-2"
+            >
+              ← Annuler
             </button>
           </form>
           <p className="text-center text-[#7A7568] text-xs mt-4">
@@ -100,6 +182,11 @@ export function Checkout() {
               <span>Total à payer à l'arrivée</span>
               <span className="text-xl">{price}€</span>
             </div>
+          </div>
+          <div className="mt-4 pt-4 border-t border-white/20">
+            <p className="text-white/40 text-xs">✅ Annulation gratuite 48h avant</p>
+            <p className="text-white/40 text-xs mt-1">✅ Meilleur tarif garanti</p>
+            <p className="text-white/40 text-xs mt-1">✅ Confirmation immédiate par email</p>
           </div>
         </div>
       </div>

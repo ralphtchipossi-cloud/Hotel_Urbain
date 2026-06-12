@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 
 const perks = [
   { num: "01", title: "Accès 24h/24", desc: "Espace ouvert en continu. Travaillez à l'heure qui vous convient, sans contrainte." },
@@ -10,6 +11,8 @@ const perks = [
 ];
 
 export function Coworking() {
+  const navigate = useNavigate();
+
   return (
     <section id="coworking" className="bg-[#131210] py-24 px-6 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -73,6 +76,17 @@ export function Coworking() {
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* NOUVEAU - Bouton Réserver un bureau */}
+            <div className="mt-8">
+              <button
+                onClick={() => navigate('/coworking-booking')}
+                className="bg-[#B8935A] text-white px-8 py-3 hover:bg-[#A0803F] transition-colors text-sm tracking-widest uppercase"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.15em" }}
+              >
+                Réserver un bureau
+              </button>
             </div>
           </div>
 
