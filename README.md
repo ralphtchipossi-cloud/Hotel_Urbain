@@ -4,6 +4,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.12-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js)](https://nodejs.org/)
+[![Stripe](https://img.shields.io/badge/Stripe-Payments-008CDD?logo=stripe)](https://stripe.com/)
 
 ## À propos
 
@@ -16,6 +18,8 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 - Premium accessible
 
 **Inspirations :** CitizenM, Mama Shelter, OKKO Hotels, Pullman, Moxy
+
+**Site web :** [urbanhouseroubaix.fr](https://urbanhouseroubaix.fr)
 
 ---
 
@@ -30,6 +34,10 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 | Framer Motion | 12.23.24 | Animations |
 | Radix UI | multiples | Composants accessibles |
 | Lucide React | 0.487.0 | Icônes |
+| Node.js + Express | - | Back-end API |
+| SQLite | - | Base de données |
+| Stripe | - | Paiements (mode test) |
+| Nodemailer | - | Envoi d'emails |
 
 ---
 
@@ -47,52 +55,20 @@ Urban House est un hôtel nouvelle génération situé à **Roubaix**, conçu po
 git clone <url-du-repo>
 cd Hotel_Urbain_Roubaix
 
-# 2. Installer les dépendances
+# 2. Installer les dépendances front-end
 npm install
 
-# 3. Lancer le serveur de développement
+# 3. Installer les dépendances back-end
+cd server
+npm install express cors dotenv stripe nodemailer sqlite3
+cd ..
+
+# 4. Configurer les variables d'environnement
+# Créer un fichier server/.env (voir exemple ci-dessous)
+
+# 5. Lancer le back-end (terminal 1)
+cd server
+node index.js
+
+# 6. Lancer le front-end (terminal 2)
 npm run dev
-
-
-Hotel_Urbain_Roubaix/
-├── public/
-│   └── images/
-│       └── hero-bg.jpg
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   │   ├── figma/              # Composants générés par l'IA Figma
-│   │   │   ├── ui/                 # Composants UI (shadcn)
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── Hero.tsx
-│   │   │   ├── Rooms.tsx
-│   │   │   ├── Offers.tsx
-│   │   │   ├── Gallery.tsx
-│   │   │   ├── Coworking.tsx
-│   │   │   ├── BusinessServices.tsx
-│   │   │   ├── Testimonials.tsx
-│   │   │   ├── FAQ.tsx
-│   │   │   ├── Reservation.tsx
-│   │   │   ├── Contact.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   └── Logo.tsx
-│   │   ├── styles/
-│   │   │   ├── fonts.css
-│   │   │   ├── globals.css
-│   │   │   ├── index.css
-│   │   │   ├── tailwind.css
-│   │   │   └── theme.css
-│   │   └── App.tsx
-│   └── main.tsx
-├── index.html
-├── package.json
-├── vite.config.ts
-├── postcss.config.mjs
-├── default_shadcn_theme.css
-├── logo.png
-├── hero-bg.jpeg
-├── .gitattributes
-├── .gitignore
-├── ATTRIBUTIONS.md
-├── pnpm-workspace.yaml
-└── README.md
