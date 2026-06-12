@@ -18,6 +18,9 @@ export function Confirmation() {
           <p><strong>Dates :</strong> {dates?.checkin} → {dates?.checkout}</p>
           <p><strong>Montant :</strong> {price}€ à payer à l'arrivée</p>
         </div>
+        <p className="text-[#7A7568] text-sm mb-4">
+          Une question ? Contactez-nous : <a href="mailto:contact@urbanhouseroubaix.fr" className="text-[#B8935A] hover:underline">contact@urbanhouseroubaix.fr</a>
+        </p>
         <Link to="/" className="inline-block bg-[#B8935A] text-white px-8 py-3 hover:bg-[#A0803F] transition">
           Retour à l'accueil
         </Link>

@@ -42,7 +42,7 @@ export function Contact() {
               {
                 icon: Mail,
                 title: "E-mail",
-                lines: ["reception@hotel_rbx.fr"],
+                lines: ["contact@urbanhouseroubaix.fr"],
               },
               {
                 icon: Clock,
@@ -97,7 +97,6 @@ export function Contact() {
 
           {/* Right: map placeholder */}
           <div className="relative bg-[#1A1917] overflow-hidden min-h-[400px] flex items-center justify-center">
-            {/* Stylised map grid overlay */}
             <div className="absolute inset-0 opacity-10">
               {Array.from({ length: 10 }).map((_, i) => (
                 <div key={i} className="absolute left-0 right-0 h-px bg-white" style={{ top: `${i * 10}%` }} />
@@ -106,7 +105,6 @@ export function Contact() {
                 <div key={i} className="absolute top-0 bottom-0 w-px bg-white" style={{ left: `${i * 10}%` }} />
               ))}
             </div>
-            {/* Pin */}
             <div className="relative flex flex-col items-center gap-3 z-10">
               <div className="w-14 h-14 bg-[#B8935A] flex items-center justify-center shadow-lg">
                 <MapPin className="w-6 h-6 text-white" strokeWidth={1.5} />
