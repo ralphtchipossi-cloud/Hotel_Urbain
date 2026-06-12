@@ -13,23 +13,26 @@ export function Footer() {
   return (
     <footer className="bg-[#0C0B09] pt-16 pb-8 px-6 lg:px-16">
       <div className="max-w-7xl mx-auto">
-        {/* Top row - 4 colonnes */}
+        {/* Top row - 5 colonnes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           
-          {/* Colonne 1 - Marque */}
+          {/* Colonne 1 - Marque avec logo */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-8 h-8 border border-[#B8935A] flex items-center justify-center">
-                <span className="text-[#B8935A] text-xs tracking-widest font-medium">UH</span>
-              </div>
+              {/* Logo image */}
+              <img 
+                src="/logo.png" 
+                alt="Urban House Logo" 
+                className="h-8 w-auto object-contain"
+              />
               <span className="text-white tracking-[0.2em] uppercase text-sm font-light">
-                Urban House
+                URBAN HOUSE
               </span>
             </div>
             <p className="text-white/30 text-xs leading-relaxed mb-4">
               Hôtel business & moderne<br />Roubaix, France
             </p>
-            {/* Réseaux sociaux avec vraies icônes */}
+            {/* Réseaux sociaux */}
             <div className="flex gap-3">
               {/* Instagram */}
               <a href="#" className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/40 hover:border-[#B8935A] hover:text-[#B8935A] hover:bg-white/5 transition-all duration-300 rounded-full">
@@ -50,10 +53,17 @@ export function Footer() {
           <div>
             <h4 className="text-white/30 text-[11px] tracking-[0.2em] uppercase mb-4 font-semibold">Navigation</h4>
             <ul className="space-y-2">
-              {["Accueil", "Chambres", "Coworking", "Services", "Réservation", "Contact"].map((l) => (
+              {["Accueil", "Chambres", "Coworking", "Services", "Réservation", "Urban Club", "Contact"].map((l) => (
                 <li key={l}>
                   <button
-                    onClick={() => scrollTo(l === "Réservation" ? "#reservation" : `#${l.toLowerCase()}`)}
+                    onClick={() => {
+                      if (l === "Urban Club") {
+                        window.location.href = "/urban-club";
+                      } else {
+                        const id = l === "Réservation" ? "#reservation" : `#${l.toLowerCase()}`;
+                        scrollTo(id);
+                      }
+                    }}
                     className="text-white/40 hover:text-[#B8935A] text-xs transition-colors duration-200"
                   >
                     {l}
